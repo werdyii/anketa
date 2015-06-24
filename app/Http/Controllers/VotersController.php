@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use Request;
+//use Request;
 
 use App\Voter;
 use App\Http\Requests;
+use App\Http\Requests\CreateVoterRequest;
 use App\Http\Controllers\Controller;
 
 class VotersController extends Controller
@@ -39,11 +40,12 @@ class VotersController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(CreateVoterRequest $request)
     {
-        $input = Request::all();
         
-        Voter::create($input);
+        //Voter::create(Request::all());
+        Voter::create($request->all());
+        //return $request->all();
         
         return redirect('voters');
     }

@@ -29,5 +29,17 @@
 		{!! Form::submit('Vytvor Voliča', ['class'=>'btn btn-primary form-control']); !!}
 		
 	{!! Form::close() !!}
+	
+	@if ($errors->any())
+	
+		<div class="alert alert-danger">
+			
+			@foreach($errors->all() as $error)
+				<div class="row"><strong>POZOR !!! </strong> {{ $error }}</div>
+			@endforeach
+			
+		</div>
+		
+	@endif
 
 @stop
