@@ -17,5 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('voters','VotersController@index');
-Route::get('voters/{id}','VotersController@show');
 Route::get('voters/create','VotersController@create');
+Route::get('voters/{id}','VotersController@show');
+Route::post('voters','VotersController@store');
+
