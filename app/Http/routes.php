@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('voters','VotersController@index');
+Route::get('voters/{id}','VotersController@show');
+Route::get('voters/create','VotersController@create');
