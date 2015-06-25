@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::get('voters','VotersController@index');
 Route::get('voters/create','VotersController@create');
 Route::get('voters/{id}','VotersController@show');
 Route::post('voters','VotersController@store');
-
+*/
+Route::resource('voters','VotersController');

@@ -32,7 +32,8 @@
 			<td>
 			<div class="btn-group" role="group">
 				<a class="btn btn-default btn-sm" href="{{ action('VotersController@show',[$voter->id]) }}" role="button">Show</a>&nbsp;
-				<a class="btn btn-primary btn-sm" href="{{ url('/voters',$voter->id) }}" role="button">Edit</a>&nbsp;
+				<!-- a class="btn btn-primary btn-sm" href="{{ url('/voters',$voter->id) }}" role="button">Edit</a>&nbsp; -->
+				<a class="btn btn-primary btn-sm" href="{{ action('VotersController@edit',[$voter->id]) }}" role="button">Edit</a>&nbsp;
 				<a class="btn btn-danger btn-sm" href="/voters/{{ $voter->id }}" role="button">Delete</a>&nbsp;
 			</div>
 			</td>

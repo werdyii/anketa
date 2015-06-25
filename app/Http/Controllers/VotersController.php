@@ -71,7 +71,9 @@ class VotersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $voter = Voter::findOrFail($id);
+
+        return view('voters.edit',compact('voter')); 
     }
 
     /**
