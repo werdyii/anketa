@@ -14,32 +14,16 @@
 
 		<!-- ratio Sex -->
 		<div class="radio">
-		  <label>
-		    <input type="radio" name="sex" id="optionsRadios1" value="male">
-		    Muž
-		  </label>
+			<label>{!! Form::radio('sex', 'male'); !!} Muž </label>
 		</div>
 		<div class="radio">
-		  <label>
-		    <input type="radio" name="sex" id="optionsRadios2" value="female">
-		    Žena
-		  </label>
+			<label>{!! Form::radio('sex', 'female'); !!} Žena</label>
 		</div>
 
 		{!! Form::submit('Vytvor Voliča', ['class'=>'btn btn-primary form-control']); !!}
 		
 	{!! Form::close() !!}
 	
-	@if ($errors->any())
-	
-		<div class="alert alert-danger">
-			
-			@foreach($errors->all() as $error)
-				<div class="row"><strong>POZOR !!! </strong> {{ $error }}</div>
-			@endforeach
-			
-		</div>
-		
-	@endif
+	@include('errors.list')
 
 @stop

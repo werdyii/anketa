@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 
 use App\Voter;
 use App\Http\Requests;
-use App\Http\Requests\CreateVoterRequest;
+use App\Http\Requests\VoterRequest;
 use App\Http\Controllers\Controller;
 
 class VotersController extends Controller
@@ -40,7 +40,7 @@ class VotersController extends Controller
      *
      * @return Response
      */
-    public function store(CreateVoterRequest $request)
+    public function store(VoterRequest $request)
     {
         
         //Voter::create(Request::all());
@@ -82,9 +82,13 @@ class VotersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id, VoterRequest $request)
     {
-        //
+        $voter = Voter::findOrFail($id);
+        
+        $voter->update($request->all());
+        
+        return redirect('voters');
     }
 
     /**
