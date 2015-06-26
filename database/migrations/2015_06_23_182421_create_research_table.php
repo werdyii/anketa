@@ -19,7 +19,6 @@ class CreateResearchTable extends Migration
             $table->integer('proposals_id')->unsigned();
 
             $table->smallInteger('ratio');
-
             $table->timestamps();
             
             $table->foreign('voters_id')->references('id')->on('voters')->onDelete('cascade');
