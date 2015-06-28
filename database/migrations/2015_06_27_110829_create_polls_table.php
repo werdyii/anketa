@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnketsTable extends Migration
+class CreatePollsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateAnketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ankets', function (Blueprint $table) {
+        Schema::create('polls', function (Blueprint $table) {
             $table->increments('id');
             $table->text('name');
             $table->mediumText('description');
-            $table->date('publised_at');
-            $table->date('expired_at');
+            $table->date('published_at');
+            $table->date('expires_at');            
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAnketsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ankets');
+        Schema::drop('polls');
     }
 }
