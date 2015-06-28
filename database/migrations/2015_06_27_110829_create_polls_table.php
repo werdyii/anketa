@@ -14,10 +14,12 @@ class CreatePollsTable extends Migration
     {
         Schema::create('polls', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
+            $table->string('name');
+            $table->enum('status',['preview','run','end']);
+            $table->smallInteger('limit');
             $table->mediumText('description');
-            $table->date('published_at');
-            $table->date('expires_at');            
+            $table->timestamp('published_at');
+            $table->timestamp('expires_at');            
             $table->timestamps();
         });
     }

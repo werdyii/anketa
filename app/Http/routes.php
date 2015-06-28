@@ -23,6 +23,9 @@ Route::post('voters','VotersController@store');
 */
 Route::resource('voters','VotersController');
 
+Route::get('admin/',function(){
+	return view('admin.index');
+});
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin'], function()
 {

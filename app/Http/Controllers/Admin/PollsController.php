@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
+use App\Poll;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,11 @@ class PollsController extends Controller
      */
     public function index()
     {
-        return 'Administarcia Ankiet ;-)';
+        //return "Vrat všetkých voličov";
+        $polls = Poll::all();
+
+        return view('admin.polls.index',compact('polls'));
+        //return view('admin.polls.index');
     }
 
     /**
@@ -27,7 +32,7 @@ class PollsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.polls.create');
     }
 
     /**
