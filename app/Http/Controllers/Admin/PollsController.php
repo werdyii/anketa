@@ -40,9 +40,13 @@ class PollsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(VoterRequest $request)
     {
-        //
+        Voter::create(Request::all());
+        //Voter::create($request->all());
+        //return $request->all();
+        
+        return redirect('admin/polls');
     }
 
     /**

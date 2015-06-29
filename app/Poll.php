@@ -26,8 +26,7 @@ class Poll extends Model
 		'expires_at'
 	];
 
-    // protected $dates = ['published_at'];
-    // protected $dates = ['expires_at'];
+    protected $dates = ['published_at','expires_at'];
 
     public function setPublishedAtAttribute($date)
     {
