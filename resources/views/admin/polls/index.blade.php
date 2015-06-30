@@ -24,7 +24,7 @@
 			<td>
 				<div class="btn-group" role="group">
 					<a class="btn btn-default btn-sm" href="{{ url('/admin/polls',$poll->id) }}" role="button">Show</a>&nbsp;
-					<a class="btn btn-primary btn-sm" href="{{ url('/admin/polls/create',$poll->id,'edit') }}" role="button">Edit</a>&nbsp;
+					<a class="btn btn-primary btn-sm" href="{{ route('admin.polls.edit', $poll->id) }}" role="button">Edit</a>&nbsp;
 					<a class="btn btn-danger btn-sm" href="/admin/polls/{{ $poll->id }}" role="button">Delete</a>&nbsp;
 				</div>
 			</td>

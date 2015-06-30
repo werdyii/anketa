@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Poll;
 use App\Http\Requests;
+use App\Http\Requests\PollRequest;
 use App\Http\Controllers\Controller;
 
 class PollsController extends Controller
@@ -40,10 +41,10 @@ class PollsController extends Controller
      *
      * @return Response
      */
-    public function store(VoterRequest $request)
+    public function store(PollRequest $request)
     {
-        Voter::create(Request::all());
-        //Voter::create($request->all());
+        //Poll::create(Request::all());
+        Poll::create($request->all());
         //return $request->all();
         
         return redirect('admin/polls');
@@ -68,7 +69,9 @@ class PollsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $poll = Poll::findOrFail($id);
+
+        return view('admin.polls.edit',compact('poll')); 
     }
 
     /**
@@ -77,9 +80,14 @@ class PollsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id, PollRequest $request)
     {
-        //
+        $poll = Poll::findOrFail($id);
+        
+        $poll->update($request->all());
+        
+        return redirect('admin\polls');
+        
     }
 
     /**

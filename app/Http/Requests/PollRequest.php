@@ -13,7 +13,7 @@ class PollRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class PollRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name',
+            'description',
+            'limit',
+            'status',            
+            'published_at',
+            'expires_at'
         ];
     }
 }

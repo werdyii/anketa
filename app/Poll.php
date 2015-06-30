@@ -22,6 +22,8 @@ class Poll extends Model
 	protected $fillable = [
 		'name',
 		'description',
+        'limit',
+        'status',
 		'published_at',
 		'expires_at'
 	];

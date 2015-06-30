@@ -1,11 +1,3 @@
-<!--             $table->increments('id');
-            $table->string('name');
-            $table->enum('status',['preview','run','end']);
-            $table->smallInteger('limit');
-            $table->mediumText('description');
-            $table->timestamp('published_at');
-            $table->timestamp('expires_at');  	
- -->
 	<!-- input Name	-->
     <div class="form-group">
 	    {!! Form::label('name', 'Názov ankety:'); !!}
@@ -45,8 +37,6 @@
 	    {!! Form::label('expires_at', 'Koniec ankety:'); !!}
 	    {!! Form::input('date','expires_at', null, ['class'=>'form-control']); !!}
     </div>
-
-
 
 	{!! Form::submit($LabelSubmitButton, ['class'=>'btn btn-primary active']); !!}
 	<a class="btn btn-default active" href="{{ action('Admin\PollsController@index') }}" role="button">Späť</a>
