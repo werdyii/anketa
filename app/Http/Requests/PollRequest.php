@@ -24,12 +24,12 @@ class PollRequest extends Request
     public function rules()
     {
         return [
-            'name',
-            'description',
-            'limit',
-            'status',            
-            'published_at',
-            'expires_at'
+            'name'=>'required|string|min:3',
+            'description'=>'required|string',
+            'limit'=>'required|integer|min:3|max:12',
+            'status'=>'required|in:preview,run,end',
+            'published_at'=>'required|date',
+            'expires_at'=>'required|date'
         ];
     }
 }

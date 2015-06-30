@@ -58,7 +58,9 @@ class PollsController extends Controller
      */
     public function show($id)
     {
-        //
+        $poll = Poll::findOrFail($id);
+
+        return view('admin.polls.show',compact('poll')); 
     }
 
     /**
@@ -70,6 +72,8 @@ class PollsController extends Controller
     public function edit($id)
     {
         $poll = Poll::findOrFail($id);
+        
+        //dd($poll);
 
         return view('admin.polls.edit',compact('poll')); 
     }
