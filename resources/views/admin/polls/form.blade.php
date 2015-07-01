@@ -29,13 +29,13 @@
 	<!-- input Published At	-->
     <div class="form-group">
 	    {!! Form::label('published_at', 'Zverejnenie ankety:'); !!}
-	    {!! Form::date('published_at', null, ['class'=>'form-control']); !!}
+	    {!! Form::date('published_at', date('Y-m-d'), ['class'=>'form-control']); !!}
     </div>
 
 	<!-- input Expires At	-->
     <div class="form-group">
 	    {!! Form::label('expires_at', 'Koniec ankety:'); !!}
-	    {!! Form::input('date','expires_at', null, ['class'=>'form-control']); !!}
+	    {!! Form::input('date','expires_at', date('Y-m-d'), ['class'=>'form-control']); !!}
     </div>
 
 	{!! Form::submit($LabelSubmitButton, ['class'=>'btn btn-primary active']); !!}

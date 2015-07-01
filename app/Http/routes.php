@@ -11,9 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+Route::get('/','ResearchController@index');
+Route::get('step1/{id}', 'ResearchController@step1');
+Route::get('step2/{id}','ResearchController@step2');
+Route::get('step3/{id}','ResearchController@step3');
+Route::get('thanks/{id}','ResearchController@thanks');
 
 /*
 Route::get('voters','VotersController@index');
@@ -22,6 +29,8 @@ Route::get('voters/{id}','VotersController@show');
 Route::post('voters','VotersController@store');
 */
 Route::resource('voters','VotersController');
+
+
 
 Route::get('admin/',function(){
 	return view('admin.index');

@@ -60,6 +60,8 @@ class PollsController extends Controller
     {
         $poll = Poll::findOrFail($id);
 
+        //dd($poll->published_at);
+
         return view('admin.polls.show',compact('poll')); 
     }
 
@@ -90,7 +92,7 @@ class PollsController extends Controller
         
         $poll->update($request->all());
         
-        return redirect('admin\polls');
+        return redirect('admin/polls');
         
     }
 

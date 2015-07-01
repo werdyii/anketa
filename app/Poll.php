@@ -57,4 +57,8 @@ class Poll extends Model
     	$query->where('expires_at','<=',Carbon::now());
     }
     
+    public function researchs()
+    {
+        return $this->hasMany('App\Research');
+    }
 }
