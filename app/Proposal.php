@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proposal extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = ['proposal'];
+
+    public function poll()
+    {
+        return $this->belongsTo('App\Poll');
+    }
+
 }

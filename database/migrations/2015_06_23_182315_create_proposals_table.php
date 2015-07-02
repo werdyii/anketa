@@ -14,8 +14,12 @@ class CreateProposalsTable extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->increments('id');
-            $table->mediumText('description');
+
+            $table->integer('poll_id')->unsigned();
+            $table->mediumText('proposal');
             $table->timestamps();
+
+            $table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
         });
     }
 

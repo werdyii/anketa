@@ -17,6 +17,10 @@
 
 
 Route::get('/','ResearchController@index');
+
+Route::get('proposals/{id}','ProposalsController@index');
+
+
 Route::get('step1/{id}', 'ResearchController@step1');
 Route::get('step2/{id}','ResearchController@step2');
 Route::get('step3/{id}','ResearchController@step3');

@@ -61,4 +61,10 @@ class Poll extends Model
     {
         return $this->hasMany('App\Research');
     }
+
+    public function proposals()
+    {
+        return $this->hasMany('App\Proposal');
+    }
+
 }
