@@ -23,7 +23,7 @@
 			<td>{{ $poll->description }}</td>
 			<td><small>[ {{$poll->published_at}} ]</small></td>
 			<td>{{ $poll->limit }}</td>
-			<td><a class="btn btn-default btn-sm" href="{{ url('/step1', $poll->id) }}" role="button">Spusti Anketu</a>&nbsp;</td>
+			<td><a class="btn btn-default btn-sm" href="{{ url('/proposals', $poll->id) }}" role="button">Spusti Anketu</a>&nbsp;</td>
 		</tr>
 		@endforeach
       </tbody>

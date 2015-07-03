@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
+use Validator;
 use App\Proposal;
 use App\Poll;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
 
 class ProposalsController extends Controller
 {
@@ -18,9 +18,10 @@ class ProposalsController extends Controller
      */
     public function index($poll)
     {
-        $proposals = Poll::findOrFail($poll)->proposals();
+        $poll = Poll::findOrFail($poll);
+        $proposals = $poll->proposals();
 
-        return view('proposals.index',compact('proposals'));        
+        return view('proposals.index',compact('proposals','poll'));        
     }
 
     /**
@@ -28,9 +29,16 @@ class ProposalsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
+
+        dd($request);
+
+        $validator = Validator::make($request->all(), ['proposal' => 'required|unique:posts|max:255']);
+
+        Proposal::create($request->all());
         
+        return redirect()->action('ProposalsController@index', [$request->poll_id()]);
     }
 
     /**

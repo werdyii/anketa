@@ -19,7 +19,7 @@
 Route::get('/','ResearchController@index');
 
 Route::get('proposals/{id}','ProposalsController@index');
-
+Route::post('proposals','ProposalsController@store');
 
 Route::get('step1/{id}', 'ResearchController@step1');
 Route::get('step2/{id}','ResearchController@step2');
