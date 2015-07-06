@@ -19,7 +19,7 @@ class ProposalsController extends Controller
     public function index($poll)
     {
         $poll = Poll::findOrFail($poll);
-        $proposals = $poll->proposals();
+        $proposals = $poll->proposals; //dd($proposals);
 
         return view('proposals.index',compact('proposals','poll'));        
     }
@@ -32,13 +32,17 @@ class ProposalsController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), ['proposal' => 'required|unique:posts|max:255']);
+        //$validator = Validator::make($request->all(), ['proposal' => 'required|unique:posts|max:255']);
 
-        $prosal = new Proposal($request->all());
-
-        Poll::poll()->proposals()->save($proposal);
+        $poll = Poll::findOrFail($request->poll_id);
         
-        return redirect()->action('ProposalsController@index');
+        $proposal = new Proposal($request->all());
+        
+        //return $poll->toArray();
+
+        $poll->proposals()->save($proposal);
+        
+        return redirect()->action('ProposalsController@index', $request->poll_id );
     }
 
     /**
