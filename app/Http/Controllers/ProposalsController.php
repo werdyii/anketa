@@ -32,13 +32,13 @@ class ProposalsController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
-
         $validator = Validator::make($request->all(), ['proposal' => 'required|unique:posts|max:255']);
 
-        Proposal::create($request->all());
+        $prosal = new Proposal($request->all());
+
+        Poll::poll()->proposals()->save($proposal);
         
-        return redirect()->action('ProposalsController@index', [$request->poll_id()]);
+        return redirect()->action('ProposalsController@index');
     }
 
     /**
