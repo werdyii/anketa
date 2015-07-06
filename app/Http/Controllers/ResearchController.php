@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Poll;
 use App\Research;
-
+use App\Voter;
 use App\Http\Requests;
 use App\Http\Requests\VoterRequest;
 use App\Http\Controllers\Controller;
@@ -32,28 +32,63 @@ class ResearchController extends Controller
      */
     public function step1($id)
     {
+        
         $poll = Poll::findOrFail($id);
 
         return view('polls.step1',compact('poll'));
     }
 
+
     public function storeStep1(VoterRequest $request)
     {
-        Voter::create($request->all());
+
+        //return $request->all();
+        //dd($request->all());
+
+        $voter = new Voter($request->all());
+        $voter->save();
+
+        $data = array('poll_id'=>$request->poll_id, 'voter_id'=>$voter->id );
         
-        return redirect('step2');
+        return redirect()->action('ResearchController@step2', $data );
+
     }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function step2($id)
+    public function step2($poll_id,$voter_id)
     {
-        $poll = Poll::findOrFail($id);
+        $poll = Poll::findOrFail($poll_id);
+        $voter = Voter::findOrFail($voter_id);
+        $proposals = $poll->proposals;
 
-        return view('polls.step2',compact('poll'));
+        return view('polls.step2',compact('poll','voter','proposals'));
     }
+
+    public function storeStep2(Request $request)
+    {
+
+        //$poll = Poll::findOrFail($request->poll_id);
+        //$voter = Voter::findOrFail($request->voter_id);
+        foreach ($request->proposals as $proposal)
+        { 
+            $research = new Research;
+            $research->polls_id = $request->poll_id;
+            $research->voters_id = $request->voter_id;
+            $research->proposals_id = $proposal;
+            $research->save();
+        };
+
+        $data = array('poll_id'=>$request->poll_id, 'voter_id'=>$voter->id );
+        
+        return redirect()->action('ResearchController@step3', $data );
+
+    }
+
 
     /**
      * Display a listing of the resource.

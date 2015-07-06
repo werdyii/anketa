@@ -43,12 +43,9 @@ class VotersController extends Controller
      */
     public function store(VoterRequest $request)
     {
+                
+        //$poll = Poll::findOrFail($request->poll_id);
         
-        dd($request->all());
-        
-        $poll = Poll::findOrFail($request->poll_id);
-        
-        return $poll;
         //Voter::create(Request::all());
         Voter::create($request->all());
         //return $request->all();

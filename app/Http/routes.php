@@ -22,7 +22,11 @@ Route::get('proposals/{id}','ProposalsController@index');
 Route::post('proposals','ProposalsController@store');
 
 Route::get('step1/{id}', 'ResearchController@step1');
-Route::get('step2/{id}','ResearchController@step2');
+Route::post('step1','ResearchController@storeStep1');
+
+Route::get('step2/{poll},{voter}','ResearchController@step2');
+Route::post('step2','ResearchController@storeStep2');
+
 Route::get('step3/{id}','ResearchController@step3');
 Route::get('thanks/{id}','ResearchController@thanks');
 

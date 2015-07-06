@@ -8,7 +8,8 @@
     <h3>Otázky</h3>
     <!-- http://laravelcollective.com/docs/5.1/html -->
     {!! Form::open(array('url' => 'proposals')) !!}
-    <input type="hidden" name="poll_id" value="{{ $poll->id }}">
+    {!! Form::hidden('poll_id', $poll->id ) !!}
+    <!-- input type="hidden" name="poll_id" value="{{ $poll->id }}" -->
 
     <ul class="list-unstyled">
       <li>
