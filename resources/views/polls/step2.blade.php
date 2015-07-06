@@ -15,7 +15,7 @@
 	<ul class="list-unstyled">
   	@foreach($proposals as $proposal)
 	<li>
-  		{!! Form::checkbox('proposals', $proposal->id) !!}
+  		{!! Form::checkbox('proposals[]', $proposal->id) !!}
 	  	{{ $proposal->proposal }}
 	</li>
 	@endforeach

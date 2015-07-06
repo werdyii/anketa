@@ -74,13 +74,17 @@ class ResearchController extends Controller
 
         //$poll = Poll::findOrFail($request->poll_id);
         //$voter = Voter::findOrFail($request->voter_id);
+        //return $request->proposals;
+
         foreach ($request->proposals as $proposal)
         { 
             $research = new Research;
-            $research->polls_id = $request->poll_id;
-            $research->voters_id = $request->voter_id;
+            $research->polls_id     = $request->poll_id;
+            $research->voters_id    = $request->voter_id;
             $research->proposals_id = $proposal;
-            $research->save();
+
+            dd($research->toArray());
+            //$research->save();
         };
 
         $data = array('poll_id'=>$request->poll_id, 'voter_id'=>$voter->id );
@@ -95,9 +99,11 @@ class ResearchController extends Controller
      *
      * @return Response
      */
-    public function step3($id)
+    public function step3($poll_id, $voter_id)
     {
-        $poll = Poll::findOrFail($id);
+        //$poll = Poll::findOrFail($request->poll_id);
+        //$voter = Voter::findOrFail($request->voter_id);
+
 
         return view('polls.step3',compact('poll'));
     }
