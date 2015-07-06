@@ -16,8 +16,10 @@
           <!-- input type="text" class="form-control" placeholder="Search for..." -->
           {!! Form::text('proposal', null, ['class'=>'form-control input-sm']); !!}
           <span class="input-group-btn">
-            <!-- button class="btn btn-default" type="button">Go!</button -->
-            {!! Form::submit('Pridaj ...', ['class'=>'btn btn-primary btn-sm active']); !!}
+            <button type="submit" value="Submit" class="btn btn-primary btn-sm active">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  
+              pridaj ... 
+            </button>
           </span>
         </div>
       </li>
@@ -30,4 +32,10 @@
       @include('errors.list')
     </ul>
     {!! Form::close() !!}
+  <div>
+      <a class="btn btn-default btn-block" href="{{ url('step1', $poll->id) }}" role="button">
+        pokračuj  
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </a>
+  </div>    
 @stop

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 //use Request;
 
 use App\Voter;
+use App\Poll;
 use App\Http\Requests;
 use App\Http\Requests\VoterRequest;
 use App\Http\Controllers\Controller;
@@ -43,6 +44,11 @@ class VotersController extends Controller
     public function store(VoterRequest $request)
     {
         
+        dd($request->all());
+        
+        $poll = Poll::findOrFail($request->poll_id);
+        
+        return $poll;
         //Voter::create(Request::all());
         Voter::create($request->all());
         //return $request->all();
