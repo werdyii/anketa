@@ -12,19 +12,28 @@ class CreateResearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('research', function (Blueprint $table) {
+        Schema::create('researches', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('polls_id')->unsigned();
-            $table->integer('voters_id')->unsigned();
-            $table->integer('proposals_id')->unsigned();
+            $table->integer('poll_id')->unsigned();
+            $table->integer('voter_id')->unsigned();
+
 
             $table->smallInteger('ratio');
             $table->timestamps();
             
-            $table->foreign('polls_id')->references('id')->on('polls')->onDelete('cascade');
-            $table->foreign('voters_id')->references('id')->on('voters')->onDelete('cascade');
-            $table->foreign('proposals_id')->references('id')->on('proposals')->onDelete('cascade');
+            $table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
+            $table->foreign('voter_id')->references('id')->on('voters')->onDelete('cascade');
+        });
+
+        Schema::create('research_proposal',function (Blueprint $table){
+            $table->integer('research_id')->unsigned()->index();
+            $table->foreign('research_id')->references('id')->on('researches')->onDelete('cascade');
+
+            $table->integer('proposal_id')->unsigned()->index();
+            $table->foreign('proposal_id')->references('id')->on('proposals')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
@@ -35,6 +44,7 @@ class CreateResearchTable extends Migration
      */
     public function down()
     {
-        Schema::drop('research');
+        Schema::drop('researches');
+        Schema::drop('research_proposal');
     }
 }
