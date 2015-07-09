@@ -1,4 +1,4 @@
-@extends('app')
+@extends('admin.admin')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 		http://laravelcollective.com/docs/5.1/html 
 		Form::model($voter, array ('method' => 'PATCH','action'=>['VotersController@update',$voter->id]])
 	-->
-	{!! Form::model($voter, array('method' => 'PATCH','route' => array('voters.update', $voter->id))) !!}
+	{!! Form::model($voter, array('method' => 'PATCH','route' => array('admin.voters.update', $voter->id))) !!}
 
 		@include('voters.form',['LabelSubmitButton'=>'Uložiť'])
 	

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 //use Illuminate\Http\Request;
 //use Request;
@@ -23,7 +24,7 @@ class VotersController extends Controller
         //return "Vrat všetkých voličov";
         $voters = Voter::all();
 
-        return view('voters.index',compact('voters'));
+        return view('admin.voters.index',compact('voters'));
     }
 
     /**
@@ -33,7 +34,7 @@ class VotersController extends Controller
      */
     public function create()
     {
-        return view('voters.create');
+        return view('admin.voters.create');
     }
 
     /**
@@ -50,7 +51,7 @@ class VotersController extends Controller
         Voter::create($request->all());
         //return $request->all();
         
-        return redirect('voters');
+        return redirect('admin.voters');
     }
 
     /**
@@ -63,7 +64,7 @@ class VotersController extends Controller
     {
         $voter = Voter::findOrFail($id);
 
-        return view('voters.show',compact('voter'));  
+        return view('admin.voters.show',compact('voter'));  
     }
 
     /**
@@ -76,7 +77,7 @@ class VotersController extends Controller
     {
         $voter = Voter::findOrFail($id);
 
-        return view('voters.edit',compact('voter')); 
+        return view('admin.voters.edit',compact('voter')); 
     }
 
     /**
@@ -91,7 +92,7 @@ class VotersController extends Controller
         
         $voter->update($request->all());
         
-        return redirect('voters');
+        return redirect('admin.voters');
     }
 
     /**
