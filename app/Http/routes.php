@@ -39,14 +39,16 @@ Route::get('voters/{id}','VotersController@show');
 Route::post('voters','VotersController@store');
 */
 
-Route::get('admin/',function(){
-	return view('admin.index');
-});
+/**
+ * ADMINISTRATION SECTION
+ * 
+ */
 
 Route::group(['namespace' => 'Admin','prefix' => 'admin'], function()
 {
-    // Controllers Within The "App\Http\Controllers\Admin" Namespace
-
+    Route::get('/',function(){
+    	return view('admin.index');
+    });
 	Route::resource('polls','PollsController');
     Route::resource('voters','VotersController');
 });
