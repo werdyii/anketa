@@ -30,10 +30,9 @@
 		</td>
 		<td>
 		<div class="btn-group" role="group">
-			<a class="btn btn-default btn-sm" href="{{ action('VotersController@show',[$voter->id]) }}" role="button">Show</a>&nbsp;
-			<!-- a class="btn btn-primary btn-sm" href="{{ url('/voters',$voter->id) }}" role="button">Edit</a>&nbsp; -->
-			<a class="btn btn-primary btn-sm" href="{{ action('VotersController@edit',[$voter->id]) }}" role="button">Edit</a>&nbsp;
-			<a class="btn btn-danger btn-sm" href="admin/voters/{{ $voter->id }}" role="button">Delete</a>&nbsp;
+			<a class="btn btn-default btn-sm" href="{{ route('admin.voters.show', ['voters' => $voter->id ]) }}" role="button">Kuk</a>&nbsp;
+			<a class="btn btn-primary btn-sm" href="{{ route('admin.voters.edit', ['voters' => $voter->id ]) }}" role="button">Uprav</a>&nbsp;
+			<a class="btn btn-danger btn-sm" href="{{ route('admin.voters.destroy', ['method' => 'DELETE', 'voters' => $voter->id ]) }}" role="button">Zmaž</a>&nbsp;
 		</div>
 		</td>
 	</tr>

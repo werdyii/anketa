@@ -13,4 +13,4 @@
 	</div>
 
 	{!! Form::submit($LabelSubmitButton, ['class'=>'btn btn-primary active']); !!}
-	<a class="btn btn-default active" href="{{ action('VotersController@index') }}" role="button">Späť</a>
+	<a class="btn btn-default btn-sm" href="{{ route('admin.voters.index') }}" role="button">Späť</a>&nbsp;

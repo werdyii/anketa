@@ -23,6 +23,8 @@ class VotersController extends Controller
     {
         //return "Vrat všetkých voličov";
         $voters = Voter::all();
+        
+        //dd($voters);
 
         return view('admin.voters.index',compact('voters'));
     }
@@ -51,7 +53,7 @@ class VotersController extends Controller
         Voter::create($request->all());
         //return $request->all();
         
-        return redirect('admin.voters');
+        return redirect('admin/voters');
     }
 
     /**
@@ -92,7 +94,7 @@ class VotersController extends Controller
         
         $voter->update($request->all());
         
-        return redirect('admin.voters');
+        return redirect('admin/voters');
     }
 
     /**
@@ -103,6 +105,8 @@ class VotersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Voter::destroy($id);
+
+        return redirect('admin/voters');
     }
 }

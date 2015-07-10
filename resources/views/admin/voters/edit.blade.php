@@ -10,7 +10,7 @@
 	-->
 	{!! Form::model($voter, array('method' => 'PATCH','route' => array('admin.voters.update', $voter->id))) !!}
 
-		@include('voters.form',['LabelSubmitButton'=>'Uložiť'])
+		@include('admin.voters.form',['LabelSubmitButton'=>'Uložiť'])
 	
 	{!! Form::close() !!}
 	

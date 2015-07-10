@@ -7,7 +7,7 @@
 	<!-- http://laravelcollective.com/docs/5.1/html -->
 	{!! Form::open(array('url' => 'admin\voters')) !!}
 
-		@include('voters.form',['LabelSubmitButton'=>'Vytvor Voliča'])
+		@include('admin.voters.form',['LabelSubmitButton'=>'Vytvor Voliča'])
 
 	{!! Form::close() !!}
 	
