@@ -6,12 +6,12 @@
 	<h1>{{ $poll->name }}</h1>
 	<p>{{ $poll->description }}</p>
 	<hr>
-	<h2>{{ $voter->name}} <small>{{ $voter->sex }}</small></h2>
+	<h2>{{ $voter['name'] }} <small>{{ $voter['sex'] }}</small></h2>
 	<!-- http://laravelcollective.com/docs/5.1/html -->
 	{!! Form::open(array('url' => 'step2')) !!}
-	{!! Form::hidden('poll_id', $poll->id ) !!}
-	{!! Form::hidden('voter_id', $voter->id ) !!}
-
+<!-- 	Form::hidden('poll_id', $poll->id )
+	Form::hidden('voter_id', $voter->id )
+ -->
 	<ul class="list-unstyled">
   	@foreach($proposals as $proposal)
 	<li>
@@ -23,7 +23,7 @@
 
 	<div class="row">
   		<div class="col-lg-6">
-		<a class="btn btn-default btn-block" href="{{ url('stap1', $poll->id) }}" role="button">
+		<a class="btn btn-default btn-block" href="{{ url('step1', $poll->id) }}" role="button">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 		späť
 		</a>

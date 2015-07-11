@@ -24,10 +24,10 @@ Route::post('proposals','ProposalsController@store');
 Route::get('step1/{id}', 'ResearchController@step1');
 Route::post('step1','ResearchController@storeStep1');
 
-Route::get('step2/{poll},{voter}','ResearchController@step2');
+Route::get('step2','ResearchController@step2');
 Route::post('step2','ResearchController@storeStep2');
 
-Route::get('step3/{poll},{voter}','ResearchController@step3');
+Route::get('step3','ResearchController@step3');
 Route::post('step3','ResearchController@storeStep3');
 
 Route::get('thanks/{id}','ResearchController@thanks');
