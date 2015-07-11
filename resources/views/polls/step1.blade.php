@@ -27,7 +27,7 @@
 
 	<div class="row">
   		<div class="col-lg-6">
-		<a class="btn btn-default btn-block" href="{{ url('proposals', $poll->id) }}" role="button">
+		<a class="btn btn-default btn-block" href="{{ url('/') }}" role="button">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 		späť
 		</a>

@@ -14,12 +14,9 @@ class CreateResearchTable extends Migration
     {
         Schema::create('researches', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('poll_id')->unsigned();
             $table->integer('voter_id')->unsigned();
 
-
-            $table->smallInteger('ratio');
             $table->timestamps();
             
             $table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
@@ -33,6 +30,7 @@ class CreateResearchTable extends Migration
             $table->integer('proposal_id')->unsigned()->index();
             $table->foreign('proposal_id')->references('id')->on('proposals')->onDelete('cascade');
 
+            $table->smallInteger('ratio');
             $table->timestamps();
         });
     }

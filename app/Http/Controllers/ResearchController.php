@@ -15,20 +15,23 @@ use App\Http\Controllers\Controller;
 class ResearchController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Zobraz všetky ankety a vymaž session.
      *
      * @return Response
      */
     public function index(Request $request)
     {
 
-        $polls = Poll::all();
+        $polls_preview  = Poll::preview()->get();
+        $polls_run      = Poll::run()->get();
+        $polls_end      = Poll::end()->get();
+        //dd($polls_end);
         $request->session()->flush();
-        return view('polls.index',compact('polls'));
+        return view('polls.index',compact('polls_preview', 'polls_run', 'polls_end'));
     }
 
     /**
-     * Display a listing of the resource.
+     * Zobraz otázky v ankete ak ešte nebeží anketa je možné tu pridať otázku
      *
      * @return Response
      */
@@ -70,6 +73,9 @@ class ResearchController extends Controller
     public function step2(Request $request)
     {
 
+        // Ulož research 
+        // 
+        // 
         // $poll = Poll::findOrFail($poll_id);
         // $voter = Voter::findOrFail($voter_id);
         // $proposals = $poll->proposals;
@@ -87,25 +93,7 @@ class ResearchController extends Controller
     public function storeStep2(Request $request)
     {
 
-        //$poll = Poll::findOrFail($request->poll_id);
-        //$voter = Voter::findOrFail($request->voter_id);
-        //dd($request->proposals);
-
         $request->session()->put('proposals', $request->proposals);
-        //dd($request->session()->all());
-
-        // foreach ($request->proposals as $proposal)
-        // { 
-        //     $research = new Research;
-        //     $research->polls_id     = $request->session()->get('poll_id');
-        //     $research->voters_id    = $request->session()->get('voter');
-        //     $research->proposals_id = $proposal;
-
-        //     dd($research->toArray());
-        //     //$research->save();
-        // };
-
-        // $data = array('poll_id'=>$request->poll_id, 'voter_id'=>$voter->id );
         
         return redirect()->action('ResearchController@step3' );
 
@@ -129,7 +117,7 @@ class ResearchController extends Controller
 
         //dd($data);
 
-        return view('polls.step3',compact('data'));
+        return view('polls.step3',$data);
     }
 
     /**
@@ -137,11 +125,50 @@ class ResearchController extends Controller
      *
      * @return Response
      */
-    public function thanks($id)
+    public function storeStep3(Request $request)
     {
-        $poll = Poll::findOrFail($id);
 
-        return view('polls.thanks',compact('poll'));
+        //dd($request->session()->all());
+        //$poll = Poll::findOrFail($request->poll_id);
+
+        //dd($request->session()->get('voter'));
+        $voter = new Voter($request->session()->get('voter'));
+        $voter->save();
+        //$request->session()->put('voter', $voter->id);
+        //dd($voter);
+        
+        $research = new Research;
+        $research->poll_id  = $request->session()->get('poll_id');
+        $research->voter_id = $voter->id;
+        $research->save();
+        $request->session()->put('research', $research->id);
+        $ratios = $request->ratio;
+        
+
+        foreach ($ratios as $proposal_id => $ratio)
+        { 
+            $research->proposals()->attach($proposal_id,['ratio' => $ratio]);
+            //$user->roles()->attach($roleId, ['expires' => $expires]);
+            //$research->ratio        = $ratio;
+            //dd($research);
+        };
+        
+        return redirect()->action('ResearchController@thanks' );
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function thanks(Request $request)
+    {
+
+        //dd($request->session()->all());
+        $research = Research::findOrFail($request->session()->get('research'));
+        $poll = $research->poll;
+        return view('polls.thanks',compact('research','poll'));
     }
 
     /**

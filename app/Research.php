@@ -13,23 +13,35 @@ class Research extends Model
      * 
      */
 
-    protected $fillable = ['ratio'];
+    //protected $fillable = ['ratio'];
     
     /**
      * Get the voter record associated with the research.
      * 
      */
-    protected function voters()
+    public function voter()
     {
-        return $this->hasOne('App\Voter');
+        return $this->belongsTo('App\Voter');
+    }
+
+    /**
+     * Get the Poll record associated with the research.
+     * 
+     */
+    public function poll()
+    {
+        return $this->belongsTo('App\Poll');
     }
     
     /**
-     * Get the Proposal record associated whit the Research.
-     * 
-     */
-     protected function proposals()
-     {
-         return $this->hasOne('App\Proposal');
-     }
+    * Get the Proposals record associated whit the Research.
+    * 
+    */
+    public function proposals()
+    {
+        return $this->belongsToMany('App\Proposal','research_proposal','research_id','proposal_id')
+                    ->withPivot('ratio')
+                    ->withTimestamps();
+    }
+
 }

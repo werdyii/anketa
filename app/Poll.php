@@ -40,7 +40,6 @@ class Poll extends Model
     	$this->attributes['expires_at'] = Carbon::parse($date);
     }
 
-
     public function scopePreview($query)
     {
     	$query->where('published_at','>',Carbon::now());
@@ -57,7 +56,7 @@ class Poll extends Model
     	$query->where('expires_at','<=',Carbon::now());
     }
     
-    public function researchs()
+    public function researches()
     {
         return $this->hasMany('App\Research');
     }

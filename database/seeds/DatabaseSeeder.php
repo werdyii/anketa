@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        // composer dump-autoload
+        // php artisan migrate:refresh --seed
+
+
         $this->call('PollsTableSeeder');
         $this->call('ProposalsTableSeeder');
 

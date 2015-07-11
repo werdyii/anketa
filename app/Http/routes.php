@@ -30,7 +30,7 @@ Route::post('step2','ResearchController@storeStep2');
 Route::get('step3','ResearchController@step3');
 Route::post('step3','ResearchController@storeStep3');
 
-Route::get('thanks/{id}','ResearchController@thanks');
+Route::get('thanks','ResearchController@thanks');
 
 /*
 Route::get('voters','VotersController@index');

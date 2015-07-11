@@ -13,4 +13,11 @@ class Proposal extends Model
         return $this->belongsTo('App\Poll');
     }
 
+	public function researches()
+	{
+		return $this->belongsToMany('App\Research','research_proposal','research_id','proposal_id')
+		->withPivot('ratio')
+		->withTimestamps();
+	}
+
 }
