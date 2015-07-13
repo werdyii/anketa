@@ -34,9 +34,6 @@
     </ul>
     {!! Form::close() !!}
   <div>
-      <a class="btn btn-default btn-block" href="{{ url('step1', $poll->id) }}" role="button">
-        pokračuj  
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      </a>
+      <a class="btn btn-default btn-block" href="{{ url('/') }}" role="button">späť</a>
   </div>    
 @stop
