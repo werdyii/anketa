@@ -17,17 +17,15 @@
 		<tbody>
 		{!! Form::open(array('url' => 'step3')) !!}
 		@foreach($proposals as $proposal)
-		<?php $radio_name = "ratio[".$proposal->id."]"; ?>
 			<tr>
-  				<td>{!! Form::radio($radio_name, 3) !!}</td>
-  				<td>{!! Form::radio($radio_name, 2) !!}</td>
-  				<td>{!! Form::radio($radio_name, 1) !!}</td>
-  				<td>{{ $proposal->proposal }}</td>
+	  			<td><input type="radio" name="ratio[{{ $proposal->id }}]" data-col="3" value="3"></td>
+	  			<td><input type="radio" name="ratio[{{ $proposal->id }}]" data-col="2" value="2"></td>
+	  			<td><input type="radio" name="ratio[{{ $proposal->id }}]" data-col="1" value="1"></td>
+	  			<td>{{ $proposal->proposal }}</td>
 			</tr>
 		@endforeach
 		</tbody>
 	</table>
-	
 	<div class="row">
   		<div class="col-lg-6">
 		<a class="btn btn-default btn-block" href="{{ url('step2') }}" role="button">
@@ -46,4 +44,18 @@
 
 	@include('errors.list')
 	    
+@stop
+
+
+@section('jscript')
+<script type="text/javascript">
+	var col, el;
+
+	jQuery("input[type=radio]").click(function() {
+	   el = $(this);
+	   col = el.data("col");
+	   $("input[data-col=" + col + "]").prop("checked", false);
+	   el.prop("checked", true);
+	});
+</script>
 @stop
