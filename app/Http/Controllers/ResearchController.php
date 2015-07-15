@@ -37,10 +37,13 @@ class ResearchController extends Controller
      */
     public function step1($id, Request $request)
     {
-        
-        $poll = Poll::findOrFail($id);
-        $request->session()->put('poll_id', $id);
-        return view('polls.step1',compact('poll'));
+        if( is_numeric($id)){
+            $poll = Poll::findOrFail($id);
+            $request->session()->put('poll_id', $id);
+            return view('polls.step1',compact('poll'));
+        }else{
+            return redirect()->action('ResearchController@index');
+        }
     }
 
 
@@ -72,22 +75,26 @@ class ResearchController extends Controller
      */
     public function step2(Request $request)
     {
+        if (($request->session()->has('poll_id'))and(($request->session()->has('voter')))) {
+            // Ulož research 
+            // 
+            // 
+            // $poll = Poll::findOrFail($poll_id);
+            // $voter = Voter::findOrFail($voter_id);
+            // $proposals = $poll->proposals;
+            
+            $voter      = $request->session()->get('voter');
+            $poll_id    = $request->session()->get('poll_id');
+            $poll       = Poll::findOrFail($poll_id);
+            $proposals  = $poll->proposals;
+            $proposals_select = $request->session()->get('proposals');
+            //dd($voter);
 
-        // Ulož research 
-        // 
-        // 
-        // $poll = Poll::findOrFail($poll_id);
-        // $voter = Voter::findOrFail($voter_id);
-        // $proposals = $poll->proposals;
+            return view('polls.step2',compact('poll','proposals','voter', 'proposals_select'));
         
-        $voter      = $request->session()->get('voter');
-        $poll_id    = $request->session()->get('poll_id');
-        $poll       = Poll::findOrFail($poll_id);
-        $proposals  = $poll->proposals;
-        $proposals_select = $request->session()->get('proposals');
-        //dd($voter);
-
-        return view('polls.step2',compact('poll','proposals','voter', 'proposals_select'));
+        }else{
+            return redirect()->action('ResearchController@index');
+        }
     }
 
     public function storeStep2(Request $request)
@@ -108,16 +115,22 @@ class ResearchController extends Controller
     public function step3(Request $request)
     {
 
-        $data       = $request->session()->all();
-        $proposals_select = $request->session()->get('proposals');
-        $proposals  = DB::table('proposals')
-                    ->whereIn('id', $proposals_select)
-                    ->get();
-        $data['proposals'] = $proposals;
+        if ($request->session()->has('proposals')) {
+            
+            $data       = $request->session()->all();
+            $proposals_select = $request->session()->get('proposals');
+            $proposals  = DB::table('proposals')
+                        ->whereIn('id', $proposals_select)
+                        ->get();
+            $data['proposals'] = $proposals;
 
-        //dd($data);
+            //dd($data);
+            return view('polls.step3',$data);
+            
+         }else{
+            return redirect()->action('ResearchController@index');
+         }
 
-        return view('polls.step3',$data);
     }
 
     /**
@@ -132,29 +145,31 @@ class ResearchController extends Controller
         //$poll = Poll::findOrFail($request->poll_id);
 
         //dd($request->session()->get('voter'));
-        $voter = new Voter($request->session()->get('voter'));
-        $voter->save();
-        //$request->session()->put('voter', $voter->id);
-        //dd($voter);
-        
-        $research = new Research;
-        $research->poll_id  = $request->session()->get('poll_id');
-        $research->voter_id = $voter->id;
-        $research->save();
-        $request->session()->put('research', $research->id);
-        $ratios = $request->ratio;
-        
+         if (($request->session()->has('poll_id'))and($request->session()->has('voter'))) {
+            $voter = new Voter($request->session()->get('voter'));
+            $voter->save();
+            //$request->session()->put('voter', $voter->id);
+            //dd($voter);
 
-        foreach ($ratios as $proposal_id => $ratio)
-        { 
-            $research->proposals()->attach($proposal_id,['ratio' => $ratio]);
-            //$user->roles()->attach($roleId, ['expires' => $expires]);
-            //$research->ratio        = $ratio;
-            //dd($research);
-        };
-        
-        return redirect()->action('ResearchController@thanks' );
+            $research = new Research;
+            $research->poll_id  = $request->session()->get('poll_id');
+            $research->voter_id = $voter->id;
+            $research->save();
+            $request->session()->put('research', $research->id);
+            $ratios = $request->ratio;
 
+            foreach ($ratios as $proposal_id => $ratio)
+            { 
+                $research->proposals()->attach($proposal_id,['ratio' => $ratio]);
+                //$user->roles()->attach($roleId, ['expires' => $expires]);
+                //$research->ratio        = $ratio;
+                //dd($research);
+            };
+            
+            return redirect()->action('ResearchController@thanks' );
+        }else{
+            return redirect()->action('ResearchController@index');
+        }
     }
 
     /**
@@ -166,9 +181,13 @@ class ResearchController extends Controller
     {
 
         //dd($request->session()->all());
-        $research = Research::findOrFail($request->session()->get('research'));
-        $poll = $research->poll;
-        return view('polls.thanks',compact('research','poll'));
+        if ($request->session()->has('research')) {
+            $research   = Research::findOrFail($request->session()->get('research'));
+            $poll       = $research->poll;
+            return view('polls.thanks',compact('research','poll'));
+        }else{
+            return redirect()->action('ResearchController@index');
+        }
     }
 
     /**
