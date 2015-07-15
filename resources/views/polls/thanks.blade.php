@@ -14,9 +14,22 @@
 		@endforeach
 	</ul>
 	<h2>Ďakujem Vám za účasť v ankete</h2>
+
+	<canvas id="research-graph" width="300" height="200"></canvas>
+
 	<p>Na potazky odpovedalo celkom {{ $poll->researches->count() }}</p>
 	<small>Research id: {{ $research->id }}</small>
 
 	<a class="btn btn-default btn-block" href="{{ url('/') }}" role="button">Ok</a>
 
+@stop
+
+@section('jscript')
+<script src="/js/chart.min.js"></script>
+
+<script>
+	(function () {
+		var ctx = document.getElementById('research-graph').getContext('2d');
+	})();
+</script>
 @stop
