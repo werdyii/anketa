@@ -27,13 +27,13 @@
 		</tbody>
 	</table>
 	<div class="row">
-  		<div class="col-lg-6">
+  		<div class="col-lg-6 col-md-6 col-xs-6">
 		<a class="btn btn-default btn-block" href="{{ url('step2') }}" role="button">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 		späť
 		</a>
 		</div>
-  		<div class="col-lg-6">
+  		<div class="col-lg-6 col-md-6 col-xs-6">
 		<button type="submit" value="Submit" class="btn btn-default btn-block">
 		  pokračuj
 		  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
