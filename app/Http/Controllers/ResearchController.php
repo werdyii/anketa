@@ -184,7 +184,22 @@ class ResearchController extends Controller
         if ($request->session()->has('research')) {
             $research   = Research::findOrFail($request->session()->get('research'));
             $poll       = $research->poll;
-            return view('polls.thanks',compact('research','poll'));
+            
+            $research_list = DB::table('research_proposal')
+                            ->join('proposals','proposals.id','=','proposal_id')
+                            ->where('poll_id',$poll->id)
+                            ->select('proposal_id','proposal',DB::raw('SUM(ratio) as total_ratio'))
+                            ->groupBy('proposal_id')
+                            ->orderBy('total_ratio','desc')->get();
+                            
+            $sex_list   = DB::table('researches')
+                            ->join('voters','voters.id','=','voter_id')
+                            ->where('poll_id',$poll->id)
+                            ->select('sex',DB::raw('count(sex) as total_sex'))
+                            ->groupBy('sex')->orderBy('total_sex','desc')->get();
+
+            //dd($sex_list);
+            return view('polls.thanks',compact('research','poll','research_list','sex_list'));
         }else{
             return redirect()->action('ResearchController@index');
         }
