@@ -32,6 +32,8 @@ Route::post('step3','ResearchController@storeStep3');
 
 Route::get('thanks','ResearchController@thanks');
 
+Route::get('end/{id}', ['as'=>'result', 'uses' => 'ResearchController@end']);
+
 /*
 Route::get('voters','VotersController@index');
 Route::get('voters/create','VotersController@create');
