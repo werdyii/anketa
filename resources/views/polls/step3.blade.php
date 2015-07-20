@@ -1,4 +1,7 @@
-<!-- Ohodnoť vybrate 3 varianty -->
+<!-- 
+	Ohodnoť vybrate 3 varianty 
+	https://css-tricks.com/radio-buttons-with-2-way-exclusivity/
+-->
 
 @extends('app')
 

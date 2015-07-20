@@ -26,7 +26,7 @@
         </thead>
         <tbody>
       @foreach($polls_preview as $poll)
-      <tr>
+      <tr class='clickable-row' data-href="{{ url('/proposals', $poll->id) }}" >
         <td><strong>{{ $poll->name }}</strong></td>
         <td>{{ $poll->description }}</td>
         <td><small>[ {{$poll->status}} ]</small></td>
@@ -44,17 +44,15 @@
           <tr>
             <th>Meno</th>
             <th>Popis</th>
-            <th>Status</th>
             <th>Limit</th>
             <th>Spusti anketu</th>
           </tr>
         </thead>
         <tbody>
       @foreach($polls_run as $poll)
-      <tr>
+      <tr class='clickable-row' data-href="{{ url('/step1', $poll->id) }}" >
         <td><strong>{{ $poll->name }}</strong></td>
         <td>{{ $poll->description }}</td>
-        <td><small>[ {{$poll->status}} ]</small></td>
         <td>{{ $poll->limit }}</td>
         <td><a class="btn btn-default btn-sm" href="{{ url('/step1', $poll->id) }}" role="button">Spusti Anketu</a>&nbsp;</td>
       </tr>
@@ -73,7 +71,7 @@
         </thead>
         <tbody>
       @foreach($polls_end as $poll)
-      <tr>
+      <tr class='clickable-row' data-href="{{ url('/end', $poll->id) }}">
         <td><strong>{{ $poll->name }}</strong></td>
         <td>{{ $poll->description }}</td>
         <td><small>[ {{$poll->expires_at}} ]</small></td>
@@ -84,4 +82,14 @@
     </div>
   </div>
   	    
+@stop
+
+@section('jscript')
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+      $(".clickable-row").click(function() {
+          window.document.location = $(this).data("href");
+      });
+  });
+</script>
 @stop
