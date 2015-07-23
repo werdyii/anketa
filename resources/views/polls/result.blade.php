@@ -16,11 +16,9 @@
 			@foreach($research_list as $list)
 			<li class="list-group-item">
 				<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-				{{ $list->proposal }} body ( {{ $list->total_ratio }} )
-				<progress value="{{ $list->total_ratio }}" max="20" class="progress">
-                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ $list->total_ratio }}" aria-valuemin="0" aria-valuemax="100">				    
+				{{ $list->proposal }} body ( {{ $list->total_ratio }} ) <br/>
+				<progress class="ratio" value="{{ $list->total_ratio }}">
                     <span class="sr-only">{{ $list->total_ratio }} bodov</span>
-                  </div>
 				</progress>
 			</li>
 			@endforeach
@@ -79,19 +77,18 @@
 	              "navy", 
 	              "gray"];
 	              
-		var journal = [];
-		
-		function addEntry(value, label, color) {
-		  journal.push({
-		    value: value,
-		    label: label,
-		    color: color
-		  });
-		}	              
-	              
+
 		var index;
+		var sum_ratio = 0;
+		var sum_sex = 0;
+		var journal = [];
 		for	(index = 0; index < data.length; index++) {
-		    addEntry(data[index].total_ratio,data[index].proposal,colors[index]);
+			journal.push({
+				value: data[index].total_ratio,
+				label: data[index].proposal,
+				color: colors[index]
+			});
+			sum_ratio += parseInt( data[index].total_ratio, 10);
 		    jQuery("ul#research-graph-label li:eq("+index+") span").css( "color", colors[index] );
 		}
 		
@@ -102,9 +99,11 @@
 				label: sex_data[index].sex,
 				color: colors[index]
 			});
+			sum_sex += parseInt( sex_data[index].total_sex, 10);
 		    jQuery("ul#sex-graph-label li:eq("+index+") span").css( "color", colors[index] );
 		}
-		
+		console.log("sum ratio "+ sum_ratio + " , sum sex "+sum_sex);
+		jQuery("progress.ratio[value]").attr("max",sum_ratio);
 					
 		var options = {
 		    //Boolean - Whether we should show a stroke on each segment
@@ -146,4 +145,28 @@
 	})();
 </script>
 
+<style type="text/css">
+	progress.ratio[value] {
+	  /* Reset the default appearance */
+	  -webkit-appearance: none;
+	     -moz-appearance: none;
+	          appearance: none;
+	  
+	  /* Get rid of default border in Firefox. */
+	  border: none;
+	  
+	  /* Dimensions */
+	  width: 100%;
+	  height: 3px;
+	}
+	progress.ratio[value]::-webkit-progress-value{
+	  background-color: red;
+	  border-radius: 5px;
+	}
+	progress.ratio[value]::-webkit-progress-bar{
+	  background-color: lightgray;
+	  border-radius: 5px;
+	  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+	}
+</style>
 @stop

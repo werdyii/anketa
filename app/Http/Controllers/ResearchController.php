@@ -223,7 +223,7 @@ class ResearchController extends Controller
                             ->select('proposal_id','proposal',DB::raw('SUM(ratio) as total_ratio'))
                             ->groupBy('proposal_id')
                             ->orderBy('total_ratio','desc')->get();
-                            
+
             $sex_list   = DB::table('researches')
                             ->join('voters','voters.id','=','voter_id')
                             ->where('poll_id',$poll->id)
