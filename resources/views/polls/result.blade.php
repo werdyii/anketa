@@ -8,16 +8,16 @@
 
 	<h3> Aktualný prehlad bodov</h3>
 	<div class="row">
-		<div class="col-md-6 col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<canvas id="research-graph" width="600" height="300"></canvas>		
 		</div>
-		<div class="col-md-6 col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<ul id="research-graph-label" class="list-group">
 			@foreach($research_list as $list)
 			<li class="list-group-item">
 				<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
 				{{ $list->proposal }} body ( {{ $list->total_ratio }} ) <br/>
-				<progress class="ratio" value="{{ $list->total_ratio }}">
+				<progress class="ratio" value="{{ $list->total_ratio }}" max="1000000" >
                     <span class="sr-only">{{ $list->total_ratio }} bodov</span>
 				</progress>
 			</li>
@@ -28,17 +28,20 @@
 
 	<h3> Na potazky odpovedalo celkom {{ $poll->researches->count() }}</h3>
 	<div class="row">
-		<div class="col-md-6 col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<ul id="sex-graph-label" class="list-group">
 			@foreach($sex_list as $list)
 			<li class="list-group-item">
 				<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
 				{{ $list->sex }} body ( {{ $list->total_sex }} )
+				<progress class="sex" value="{{ $list->total_sex }}" max="1000000" >
+                    <span class="sr-only">{{ $list->total_sex }} bodov</span>
+				</progress>				
 			</li>
 			@endforeach
 			</ul>
 		</div>
-		<div class="col-md-6 col-xs-6">
+		<div class="col-xs-12 col-sm-6">
 			<canvas id="sex-graph" width="600" height="300"></canvas>		
 		</div>
 	</div>
@@ -104,6 +107,7 @@
 		}
 		console.log("sum ratio "+ sum_ratio + " , sum sex "+sum_sex);
 		jQuery("progress.ratio[value]").attr("max",sum_ratio);
+		jQuery("progress.sex[value]").attr("max",sum_sex);
 					
 		var options = {
 		    //Boolean - Whether we should show a stroke on each segment
@@ -146,7 +150,8 @@
 </script>
 
 <style type="text/css">
-	progress.ratio[value] {
+	/* https://css-tricks.com/html5-progress-element/ */
+	progress[value] {
 	  /* Reset the default appearance */
 	  -webkit-appearance: none;
 	     -moz-appearance: none;
@@ -158,15 +163,22 @@
 	  /* Dimensions */
 	  width: 100%;
 	  height: 3px;
+	  
+	  /* IE 10 */
+	  color: red;
 	}
-	progress.ratio[value]::-webkit-progress-value{
+	progress[value]::-webkit-progress-value{
 	  background-color: red;
 	  border-radius: 5px;
 	}
-	progress.ratio[value]::-webkit-progress-bar{
+	progress[value]::-webkit-progress-bar{
 	  background-color: lightgray;
 	  border-radius: 5px;
 	  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+	}
+	progress[value]::-moz-progress-bar{
+	  background-color: red;
+	  border-radius: 5px;
 	}
 </style>
 @stop
