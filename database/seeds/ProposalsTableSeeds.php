@@ -1,23 +1,70 @@
 <?php
  
 use Illuminate\Database\Seeder;
+use App\Poll;
+use App\Proposal;
  
 class ProposalsTableSeeder extends Seeder {
  
     public function run()
     {
         // Uncomment the below to wipe the table clean before populating
-        DB::table('proposals')->delete();
- 
+        // DB::table('proposals')->delete();
+        Proposal::truncate();        
+
+        $polls_preview  = Poll::where('status','preview')->get();
+        $polls_run      = Poll::where('status','run')->get();
+        $polls_end      = Poll::where('status','end')->get();
+        $faker          = Faker\Factory::create();
+
+
+        foreach($polls_preview as $poll){
+            foreach (range(1, 6) as $index) {
+                Proposal::create([
+                    'poll_id' => $poll->id, 
+                    'proposal' => $faker->sentence, 
+                    'created_at' => new DateTime, 
+                    'updated_at' => new DateTime                 
+                    ]);
+            }
+        }
+        
+        foreach($polls_run as $poll){
+            foreach (range(1, 6) as $index) {
+                Proposal::create([
+                    'poll_id' => $poll->id, 
+                    'proposal' => $faker->sentence, 
+                    'created_at' => new DateTime, 
+                    'updated_at' => new DateTime                 
+                    ]);
+            }
+        }
+
+        foreach($polls_end as $poll){
+            foreach (range(1, 6) as $index) {
+                Proposal::create([
+                    'poll_id' => $poll->id, 
+                    'proposal' => $faker->sentence, 
+                    'created_at' => new DateTime, 
+                    'updated_at' => new DateTime                 
+                    ]);
+            }
+        }
  /*
             $table->increments('id');
 
             $table->integer('poll_id')->unsigned();
             $table->mediumText('proposal');
- */
+ 
  
         $data = array(
-            ['id' => 1, 'poll_id' => '1', 'proposal' => 'Ankete1 - Možnosť odpovede A', 'created_at' => new DateTime, 'updated_at' => new DateTime ],
+            [
+            'id' => 1, 
+            'poll_id' => '1', 
+            'proposal' => 'Ankete1 - Možnosť odpovede A', 
+            'created_at' => new DateTime, 
+            'updated_at' => new DateTime 
+            ],
             ['id' => 2, 'poll_id' => '2', 'proposal' => 'Ankete2 - Možnosť odpovede A', 'created_at' => new DateTime, 'updated_at' => new DateTime ],
             ['id' => 3, 'poll_id' => '3', 'proposal' => 'Ankete3 - Možnosť odpovede A', 'created_at' => new DateTime, 'updated_at' => new DateTime ],
             ['id' => 4, 'poll_id' => '4', 'proposal' => 'Ankete4 - Možnosť odpovede A', 'created_at' => new DateTime, 'updated_at' => new DateTime ],
@@ -46,6 +93,7 @@ class ProposalsTableSeeder extends Seeder {
  
         // Uncomment the below to run the seeder
         DB::table('proposals')->insert($data);
+ */
     }
  
 }
