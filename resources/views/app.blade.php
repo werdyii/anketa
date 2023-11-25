@@ -27,14 +27,12 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="#">Anketa</a>
+               <a class="navbar-brand" href="{{ url('/') }}">Anketa</a>
             </div>
     
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav">
-                  <li><a href="{{ url('/') }}">Home</a></li>
-                  <li><a href="{{ url('voters') }}">Voliči</a></li>
-                  <li><a href="{{ url('research') }}">Volba</a></li>
+                  <li><a href="{{ url('/admin') }}">Administracia ankiet</a></li>
                </ul> 
             </div>
          </div>

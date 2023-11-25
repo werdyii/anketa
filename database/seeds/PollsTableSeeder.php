@@ -9,7 +9,7 @@ class PollsTableSeeder extends Seeder {
     {
         // Uncomment the below to wipe the table clean before populating
         //DB::table('polls')->delete();
-        Poll::truncate();
+        //Poll::truncate();
  
  /*
  		'name',

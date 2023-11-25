@@ -10,7 +10,7 @@ class ProposalsTableSeeder extends Seeder {
     {
         // Uncomment the below to wipe the table clean before populating
         // DB::table('proposals')->delete();
-        Proposal::truncate();        
+        // Proposal::truncate();        
 
         $polls_preview  = Poll::where('status','preview')->get();
         $polls_run      = Poll::where('status','run')->get();
